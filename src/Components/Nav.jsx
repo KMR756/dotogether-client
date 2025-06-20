@@ -1,6 +1,7 @@
 import React from "react";
 import userImg from "../assets/user.png";
 import DarkMoodBtn from "./DarkMoodBtn";
+import { Link } from "react-router";
 
 const Nav = () => {
   return (
@@ -8,14 +9,14 @@ const Nav = () => {
       <nav className="bg-[#4ED7F1] dark:bg-[#1A1A1D] ">
         <div className="flex justify-between w-10/12 mx-auto py-6">
           <div className="">
-            <a href="#" className="flex  flex-col">
+            <Link to={"/"} className="flex  flex-col">
               <span className="self-center flex  caprasimo font-bold text-5xl  text-[#3A0519] dark:text-[#FF6363]">
                 DoTogether
               </span>
               <span className="flex justify-end caprasimo mt-3 text-2xl text-white">
                 Together We Do.....
               </span>
-            </a>
+            </Link>
           </div>
           <div className=" flex items-center text-3xl ">
             <ul className=" ">
