@@ -6,7 +6,7 @@ const Footer = () => {
       <footer className="">
         <div className=" w-[95%]   md:w-10/12 mx-auto">
           {/* <!--Grid--> */}
-          <div className="py-14 flex flex-col lg:flex-row items-center justify-center gap-5 md:gap-20">
+          <div className="py-14 flex flex-col lg:flex-row items-center justify-center gap-5 md:gap-10">
             <div className=" col-span-full xl:col-span-3 relative bg-gradient-to-tr from-indigo-600 dark:from-gray-600 to-violet-600 dark:to-gray-500  rounded-2xl gap-2 md:gap-12 p-2 md:p-6 w-[95%] h-96 flex flex-col justify-center items-center">
               <a href="#" className="flex  flex-col">
                 <span className="self-center flex  caprasimo font-bold text-5xl  text-white dark:text-[#FF6363]">

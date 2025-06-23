@@ -19,13 +19,15 @@ const Nav = () => {
             </Link>
           </div>
           <div className=" flex items-center ">
-            <ul className=" ">
+            <ul>
               <li>
-                <button className="relative inline-flex items-center justify-center p-0.5 mb-0 md:mb-2  me-2 overflow-hidden  font-medium text-[#3A0519] dark:text-[#FBFBFB] rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white  ">
-                  <span className="relative md:font-semibold inter text-[10px] md:text-xl lg:text-2xl xl:text-3xl px-1 md:px-2 lg:px-5 py-1 md:py-2 lg:py-2.5 transition-all ease-in duration-75 bg-[#FFDCDC] dark:bg-[#A2678A] rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
-                    Upcoming Events
-                  </span>
-                </button>
+                <Link to={"/upcomingevents"}>
+                  <button className="relative inline-flex items-center justify-center p-0.5 mb-0 md:mb-2  me-2 overflow-hidden  font-medium text-[#3A0519] dark:text-[#FBFBFB] rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white  ">
+                    <span className="relative md:font-semibold inter text-[10px] md:text-xl lg:text-2xl xl:text-3xl px-1 md:px-2 lg:px-5 py-1 md:py-2 lg:py-2.5 transition-all ease-in duration-75 bg-[#FFDCDC] dark:bg-[#A2678A] rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+                      Upcoming Events
+                    </span>
+                  </button>
+                </Link>
               </li>
             </ul>
           </div>
@@ -37,12 +39,14 @@ const Nav = () => {
                 alt=""
               />
             </button>
-            <button
-              type="button"
-              className="text-white font-semibold bg-gradient-to-r inter text-xs md:text-2xl from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br  shadow-lg shadow-red-500/20 dark:shadow-lg dark:shadow-red-800/20 rounded-lg px-1 md:px-5 py-1 md:py-2.5 text-center me-2 mb-0 md:mb-0  xl:mb-2"
-            >
-              Log In
-            </button>
+            <Link to={"/login"}>
+              <button
+                type="button"
+                className="text-white font-semibold bg-gradient-to-r inter text-xs md:text-2xl from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br  shadow-lg shadow-red-500/20 dark:shadow-lg dark:shadow-red-800/20 rounded-lg px-1 md:px-5 py-1 md:py-2.5 text-center me-2 "
+              >
+                Log In
+              </button>
+            </Link>
             <DarkMoodBtn />
           </div>
         </div>
