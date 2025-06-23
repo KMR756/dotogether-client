@@ -2,7 +2,7 @@ import React from "react";
 
 const NewsLatter = () => {
   return (
-    <div class="mx-auto mt-10 w-9/12 px-6 sm:mt-10 lg:px-8">
+    <div class="mx-auto mt-10 w-[97%] md:w-10/12 lg:w-9/12 px-3 sm:mt-10 lg:px-8">
       <div class="relative isolate overflow-hidden bg-gray-900 px-6 py-24  rounded-2xl sm:rounded-3xl sm:px-24 xl:py-32">
         <h2 class="inter  mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-[#FF6363] dark:text-white  sm:text-4xl">
           Stay Connected to Change!

@@ -10,13 +10,13 @@ const Feature = () => {
     <>
       <div>
         <Fade direction="up" duration={2000} triggerOnce>
-          <h1 className="w-10/12 mx-auto text-center text-7xl dark:text-white text-[#FF6363] inter font-black mt-20">
+          <h1 className="w-10/12 mx-auto text-center text-4xl md:text-7xl dark:text-white text-[#FF6363] inter font-black mt-8 md:mt-20">
             Features
           </h1>
         </Fade>
       </div>
-      <div className="grid grid-cols-4 w-10/12 mx-auto gap-10">
-        <div class="flex flex-col bg-white dark:bg-gray-300 shadow-sm border border-slate-200 rounded-lg my-6 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  w-10/12 mx-auto gap-2 md:gap-10">
+        <div class="flex flex-col bg-white dark:bg-gray-300 shadow-sm border border-slate-200 rounded-lg my-2 md:my-6 ">
           <div class="w-[100%]  mx-auto  rounded-xl overflow-hidden dark:bg-[#A2678A]">
             <Lottie
               animationData={CommunityImpact}
@@ -36,7 +36,7 @@ const Feature = () => {
             </p>
           </div>
         </div>
-        <div class="flex flex-col bg-white dark:bg-gray-300 shadow-sm border border-slate-200 rounded-lg my-6 ">
+        <div class="flex flex-col bg-white dark:bg-gray-300 shadow-sm border border-slate-200 rounded-lg my-2 md:my-6">
           <div class="w-[100%]  mx-auto  rounded-xl overflow-hidden dark:bg-[#A2678A]">
             <Lottie
               animationData={JoinLocalInitiatives}
@@ -55,7 +55,7 @@ const Feature = () => {
             </p>
           </div>
         </div>
-        <div class="flex flex-col bg-white dark:bg-gray-300 shadow-sm border border-slate-200 rounded-lg my-6 ">
+        <div class="flex flex-col bg-white dark:bg-gray-300 shadow-sm border border-slate-200 rounded-lg my-2 md:my-6 ">
           <div class="w-[100%]  mx-auto  rounded-xl overflow-hidden dark:bg-[#A2678A]">
             <Lottie
               animationData={ManageEvents}
@@ -74,7 +74,7 @@ const Feature = () => {
             </p>
           </div>
         </div>
-        <div class="flex flex-col bg-white dark:bg-gray-300 shadow-sm border border-slate-200 rounded-lg my-6 ">
+        <div class="flex flex-col bg-white dark:bg-gray-300 shadow-sm border border-slate-200 rounded-lg my-2 md:my-6">
           <div class="w-[100%]  mx-auto  rounded-xl overflow-hidden dark:bg-[#A2678A]">
             <Lottie
               animationData={VolunteerTracking}
