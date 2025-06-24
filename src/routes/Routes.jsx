@@ -18,6 +18,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/upcomingevents",
+        loader: () => fetch("http://localhost:3000/events"),
         Component: UpcomingEvents,
       },
       {

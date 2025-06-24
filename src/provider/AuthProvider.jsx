@@ -9,7 +9,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
-
+const provider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
@@ -17,8 +17,9 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
-  const provider = new GoogleAuthProvider();
+
   const googleLogin = () => {
+    setLoading(true);
     return signInWithPopup(auth, provider);
   };
   const logInUser = (email, password) => {
