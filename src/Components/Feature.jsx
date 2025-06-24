@@ -16,8 +16,8 @@ const Feature = () => {
         </Fade>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  w-10/12 mx-auto gap-2 md:gap-10">
-        <div class="flex flex-col bg-white dark:bg-gray-300 shadow-sm border border-slate-200 rounded-lg my-2 md:my-6 ">
-          <div class="w-[100%]  mx-auto  rounded-xl overflow-hidden dark:bg-[#A2678A]">
+        <div className="flex flex-col bg-white dark:bg-gray-300 shadow-sm border border-slate-200 rounded-lg my-2 md:my-6 ">
+          <div className="w-[100%]  mx-auto  rounded-xl overflow-hidden dark:bg-[#A2678A]">
             <Lottie
               animationData={CommunityImpact}
               loop
@@ -25,19 +25,19 @@ const Feature = () => {
               className="w-full   object-cover"
             />
           </div>
-          <div class="p-6 text-center">
-            <h4 class="mb-1 inter text-xl font-bold text-slate-800 dark:text-[#FF6363]">
+          <div className="p-6 text-center">
+            <h4 className="mb-1 inter text-xl font-bold text-slate-800 dark:text-[#FF6363]">
               Create & Manage Events
             </h4>
 
-            <p class="text-base inter text-slate-600 dark:text-black mt-4 font-light ">
+            <p className="text-base inter text-slate-600 dark:text-black mt-4 font-light ">
               Let users easily create social service events with date, location,
               and type.
             </p>
           </div>
         </div>
-        <div class="flex flex-col bg-white dark:bg-gray-300 shadow-sm border border-slate-200 rounded-lg my-2 md:my-6">
-          <div class="w-[100%]  mx-auto  rounded-xl overflow-hidden dark:bg-[#A2678A]">
+        <div className="flex flex-col bg-white dark:bg-gray-300 shadow-sm border border-slate-200 rounded-lg my-2 md:my-6">
+          <div className="w-[100%]  mx-auto  rounded-xl overflow-hidden dark:bg-[#A2678A]">
             <Lottie
               animationData={JoinLocalInitiatives}
               loop
@@ -45,18 +45,18 @@ const Feature = () => {
               className="w-full py-6 object-cover"
             />
           </div>
-          <div class="p-6 text-center">
-            <h4 class="mb-1 inter text-xl font-bold text-slate-800 dark:text-[#FF6363]">
+          <div className="p-6 text-center">
+            <h4 className="mb-1 inter text-xl font-bold text-slate-800 dark:text-[#FF6363]">
               Join Local Initiatives
             </h4>
 
-            <p class="text-base inter text-slate-600 dark:text-black mt-4 font-light ">
+            <p className="text-base inter text-slate-600 dark:text-black mt-4 font-light ">
               Users can discover and join events happening near them.
             </p>
           </div>
         </div>
-        <div class="flex flex-col bg-white dark:bg-gray-300 shadow-sm border border-slate-200 rounded-lg my-2 md:my-6 ">
-          <div class="w-[100%]  mx-auto  rounded-xl overflow-hidden dark:bg-[#A2678A]">
+        <div className="flex flex-col bg-white dark:bg-gray-300 shadow-sm border border-slate-200 rounded-lg my-2 md:my-6 ">
+          <div className="w-[100%]  mx-auto  rounded-xl overflow-hidden dark:bg-[#A2678A]">
             <Lottie
               animationData={ManageEvents}
               loop
@@ -64,18 +64,18 @@ const Feature = () => {
               className="w-full  object-cover"
             />
           </div>
-          <div class="p-6 text-center">
-            <h4 class="mb-1 inter text-xl font-bold text-slate-800 dark:text-[#FF6363]">
+          <div className="p-6 text-center">
+            <h4 className="mb-1 inter text-xl font-bold text-slate-800 dark:text-[#FF6363]">
               Volunteer Tracking
             </h4>
 
-            <p class="text-base inter text-slate-600 dark:text-black mt-4 font-light ">
+            <p className="text-base inter text-slate-600 dark:text-black mt-4 font-light ">
               Users can track how many hours they’ve volunteered.
             </p>
           </div>
         </div>
-        <div class="flex flex-col bg-white dark:bg-gray-300 shadow-sm border border-slate-200 rounded-lg my-2 md:my-6">
-          <div class="w-[100%]  mx-auto  rounded-xl overflow-hidden dark:bg-[#A2678A]">
+        <div className="flex flex-col bg-white dark:bg-gray-300 shadow-sm border border-slate-200 rounded-lg my-2 md:my-6">
+          <div className="w-[100%]  mx-auto  rounded-xl overflow-hidden dark:bg-[#A2678A]">
             <Lottie
               animationData={VolunteerTracking}
               loop
@@ -83,12 +83,12 @@ const Feature = () => {
               className="w-full  object-cover"
             />
           </div>
-          <div class="p-6 text-center">
-            <h4 class="mb-1 inter font-bold text-xl  text-slate-800 dark:text-[#FF6363]">
+          <div className="p-6 text-center">
+            <h4 className="mb-1 inter font-bold text-xl  text-slate-800 dark:text-[#FF6363]">
               Community Impact
             </h4>
 
-            <p class="text-base inter text-slate-600 dark:text-black mt-4 font-light ">
+            <p className="text-base inter text-slate-600 dark:text-black mt-4 font-light ">
               See stats on total trees planted, areas cleaned, or people
               involved.
             </p>

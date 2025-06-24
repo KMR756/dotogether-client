@@ -1,12 +1,24 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, use } from "react";
 import userImg from "../assets/user.png";
 import DarkMoodBtn from "./DarkMoodBtn";
 import { Link } from "react-router";
+import { AuthContext } from "../context/AuthContext";
 
 const Nav = () => {
+  const { user, singOutUser } = use(AuthContext);
+  console.log(user);
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-
+  const handleSingOut = () => {
+    singOutUser()
+      .then(() => {
+        console.log("sing out successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -46,53 +58,68 @@ const Nav = () => {
         </div>
 
         <div className="flex items-center space-x-2 relative" ref={dropdownRef}>
-          <button onClick={() => setDropdownOpen(!dropdownOpen)}>
-            <img
-              src={userImg}
-              className="w-7 md:w-13 h-7 md:h-13 mr-2 md:mr-4"
-              alt="User"
-            />
-          </button>
+          {user && (
+            <>
+              <button onClick={() => setDropdownOpen(!dropdownOpen)}>
+                <img
+                  src={user.photoURL || userImg}
+                  className="w-7 md:w-13 h-7 md:h-13 mr-2 md:mr-4 rounded-full"
+                  alt="User"
+                />
+              </button>
 
-          {dropdownOpen && (
-            <div className="absolute right-0 md:right-33 lg:right-21  top-8 md:top-16 lg:top-18 xl:top-20 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-30 md:w-40 dark:bg-gray-700">
-              <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-                <li>
-                  <a
-                    href="#"
-                    className="block px-2 md:px-3 py-1 md:py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >
-                    Create Event
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="block px-2 md:px-3 py-1 md:py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >
-                    Manage Events
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="block px-2 md:px-3 py-1 md:py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                  >
-                    Joined Events
-                  </a>
-                </li>
-              </ul>
-            </div>
+              {dropdownOpen && (
+                <div className="absolute right-0 md:right-33 lg:right-29 top-8 md:top-16 lg:top-18 xl:top-20 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-30 md:w-40 dark:bg-gray-700">
+                  <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-2 md:px-3 py-1 md:py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Create Event
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-2 md:px-3 py-1 md:py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Manage Events
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-2 md:px-3 py-1 md:py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Joined Events
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </>
           )}
 
-          <Link to={"/login"}>
+          {user ? (
             <button
+              onClick={handleSingOut}
               type="button"
               className="text-white font-semibold bg-gradient-to-r inter text-xs md:text-2xl from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br shadow-lg shadow-red-500/20 dark:shadow-lg dark:shadow-red-800/20 rounded-lg px-1 md:px-5 py-1 md:py-2.5 text-center"
             >
-              Log In
+              Sing Out
             </button>
-          </Link>
+          ) : (
+            <Link to={"/login"}>
+              <button
+                type="button"
+                className="text-white font-semibold bg-gradient-to-r inter text-xs md:text-2xl from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br shadow-lg shadow-red-500/20 dark:shadow-lg dark:shadow-red-800/20 rounded-lg px-1 md:px-5 py-1 md:py-2.5 text-center"
+              >
+                Log In
+              </button>
+            </Link>
+          )}
+
           <DarkMoodBtn />
         </div>
       </div>
