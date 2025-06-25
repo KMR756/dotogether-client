@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 import UpcomingEvents from "../pages/UpcomingEvents";
 import Login from "../pages/Login";
 import Registration from "../pages/Registration";
+import EventDetails from "../pages/EventDetails";
 
 export const routes = createBrowserRouter([
   {
@@ -20,6 +21,12 @@ export const routes = createBrowserRouter([
         path: "/upcomingevents",
         loader: () => fetch("http://localhost:3000/events"),
         Component: UpcomingEvents,
+      },
+      {
+        path: "/upcomingevents/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/events/${params.id}`),
+        Component: EventDetails,
       },
       {
         path: "/login",
