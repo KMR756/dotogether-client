@@ -1,6 +1,8 @@
 import React, { use } from "react";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const EventDetails = () => {
   const event = useLoaderData();
@@ -17,12 +19,49 @@ const EventDetails = () => {
   } = event;
   //   console.log(event._id);
   //   console.log(user.email);
+  const navigate = useNavigate();
+  const handleJointEvent = () => {
+    const eventJointUser = {
+      eventId: _id,
+      userEmail: user.email,
+    };
 
-  const eventJointUser = {
-    eventId: _id,
-    userEmail: user.email,
+    axios
+      .post("http://localhost:3000/jointevent", eventJointUser)
+      .then((res) => {
+        console.log(res.data);
+
+        if (res.data.joinedBefore) {
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: `Already joined "${title}"`,
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          return;
+        }
+
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `You successfully joined "${title}"`,
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          navigate("/myjoinedevents");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Something went wrong",
+          text: "Please try again later.",
+        });
+      });
   };
-  console.log(eventJointUser);
 
   return (
     <>
@@ -34,6 +73,7 @@ const EventDetails = () => {
             alt=""
           ></img>
           <button
+            onClick={handleJointEvent}
             type="button"
             class="inter mt-10 text-white  dark:text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl   font-bold rounded-lg text-xl px-5 py-2.5 text-center me-2 mb-2"
           >

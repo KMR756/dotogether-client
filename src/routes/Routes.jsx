@@ -8,6 +8,7 @@ import Registration from "../pages/Registration";
 import EventDetails from "../pages/EventDetails";
 import PrivateRoute from "./PrivateRoute";
 import Loading from "../Components/Loading";
+import MyJoined from "../pages/MyJoined";
 
 export const routes = createBrowserRouter([
   {
@@ -33,6 +34,14 @@ export const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <EventDetails></EventDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/myjoinedevents",
+        element: (
+          <PrivateRoute>
+            <MyJoined></MyJoined>
           </PrivateRoute>
         ),
       },

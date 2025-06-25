@@ -88,12 +88,12 @@ const Nav = () => {
                       </a>
                     </li>
                     <li>
-                      <a
-                        href="#"
+                      <Link
+                        to={"/myjoinedevents"}
                         className="block px-2 md:px-3 py-1 md:py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
                         Joined Events
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
