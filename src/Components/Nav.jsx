@@ -72,12 +72,12 @@ const Nav = () => {
                 <div className="absolute right-0 md:right-33 lg:right-29 top-8 md:top-16 lg:top-18 xl:top-20 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-30 md:w-40 dark:bg-gray-700">
                   <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                     <li>
-                      <a
-                        href="#"
+                      <Link
+                        to={"/createevent"}
                         className="block px-2 md:px-3 py-1 md:py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
                         Create Event
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <a
