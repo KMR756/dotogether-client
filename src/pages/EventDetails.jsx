@@ -1,8 +1,10 @@
-import React from "react";
+import React, { use } from "react";
 import { useLoaderData } from "react-router";
+import { AuthContext } from "../context/AuthContext";
 
 const EventDetails = () => {
   const event = useLoaderData();
+  const { user } = use(AuthContext);
   const {
     eventType,
     description,
@@ -11,8 +13,16 @@ const EventDetails = () => {
     organizer,
     photoURL,
     title,
+    _id,
   } = event;
-  console.log(event);
+  //   console.log(event._id);
+  //   console.log(user.email);
+
+  const eventJointUser = {
+    eventId: _id,
+    userEmail: user.email,
+  };
+  console.log(eventJointUser);
 
   return (
     <>

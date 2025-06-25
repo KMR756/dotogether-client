@@ -6,6 +6,8 @@ import UpcomingEvents from "../pages/UpcomingEvents";
 import Login from "../pages/Login";
 import Registration from "../pages/Registration";
 import EventDetails from "../pages/EventDetails";
+import PrivateRoute from "./PrivateRoute";
+import Loading from "../Components/Loading";
 
 export const routes = createBrowserRouter([
   {
@@ -20,13 +22,19 @@ export const routes = createBrowserRouter([
       {
         path: "/upcomingevents",
         loader: () => fetch("http://localhost:3000/events"),
+        hydrateFallbackElement: <Loading></Loading>,
         Component: UpcomingEvents,
       },
       {
         path: "/upcomingevents/:id",
         loader: ({ params }) =>
           fetch(`http://localhost:3000/events/${params.id}`),
-        Component: EventDetails,
+        hydrateFallbackElement: <Loading></Loading>,
+        element: (
+          <PrivateRoute>
+            <EventDetails></EventDetails>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",

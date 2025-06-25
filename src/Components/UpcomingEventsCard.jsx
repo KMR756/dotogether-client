@@ -10,7 +10,7 @@ const UpcomingEventsCard = ({ event }) => {
 
   return (
     <>
-      <Zoom duration={1000} triggerOnce>
+      <Zoom duration={500} triggerOnce>
         <div className="flex h-[455px] flex-col bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
           <img
             className="rounded-t-lg h-[200px] w-full object-cover"
