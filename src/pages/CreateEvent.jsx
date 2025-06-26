@@ -34,7 +34,7 @@ const CreateEvent = () => {
   };
   return (
     <>
-      <div class="w-7/12 mx-auto mt-10 bg-white dark:bg-gray-500 shadow-lg rounded-lg overflow-hidden">
+      <div class="lg:w-10/12 w-[96%] xl:w-7/12 mx-auto mt-10 bg-white dark:bg-gray-500 shadow-lg rounded-lg overflow-hidden">
         <div class="text-2xl bg-[#4ED7F1] dark:bg-[#1A1A1D] text-[#3A0519] dark:text-[#FF6363] py-4 px-6   text-center font-bold uppercase">
           Create your event
         </div>
@@ -113,7 +113,7 @@ const CreateEvent = () => {
               name="eventType"
               required
             >
-              <option value="">Tree Plantation</option>
+              <option value="Tree Plantation">Tree Plantation</option>
               <option value="Road/Beach Cleaning">Road/Beach Cleaning</option>
               <option value="Park Beautification">Park Beautification</option>
               <option value="Recycling Drives">Recycling Drives</option>

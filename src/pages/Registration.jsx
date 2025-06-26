@@ -8,6 +8,7 @@ const Registration = () => {
   const { createUser, updateUser, setUser } = use(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  console.log(updateUser);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -42,7 +43,7 @@ const Registration = () => {
       .then((result) => {
         // Signed up
         const user = result.user;
-        navigate(`${location.state ? location.state : "/"}`);
+
         updateUser({ displayName: name, photoURL: photo })
           .then(() => {
             setUser({ ...user, displayName: name, photoURL: photo });
@@ -53,6 +54,8 @@ const Registration = () => {
               showConfirmButton: false,
               timer: 2000,
             });
+            console.log(user);
+            navigate(`${location.state ? location.state : "/"}`);
           })
           .catch((error) => {
             toast.error(error, { duration: 3000, position: "top-right" });

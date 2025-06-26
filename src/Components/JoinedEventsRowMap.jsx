@@ -2,15 +2,8 @@ import React from "react";
 
 const JoinedEventsRowMap = ({ event }) => {
   console.log(event);
-  const {
-    eventDate,
-    eventType,
-    location,
-    organizer,
-    photoURL,
-    title,
-    userEmail,
-  } = event;
+  const { date, eventType, location, organizer, photoURL, title, userEmail } =
+    event;
 
   return (
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -39,7 +32,7 @@ const JoinedEventsRowMap = ({ event }) => {
         {organizer}
       </td>
       <td class="inter font-normal  lg:font-semibold px-6 py-1 lg:py-4 text-[10px] lg:text-xl">
-        {eventDate}
+        {date}
       </td>
       <td class="inter font-normal  lg:font-semibold px-6 py-1 lg:py-4 text-[10px] lg:text-xl">
         {location}

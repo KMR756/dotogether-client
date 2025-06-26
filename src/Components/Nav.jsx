@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect, use } from "react";
 import userImg from "../assets/user.png";
 import DarkMoodBtn from "./DarkMoodBtn";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
 
 const Nav = () => {
   const { user, singOutUser } = use(AuthContext);
   console.log(user);
-
+  const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const handleSingOut = () => {
@@ -35,6 +35,7 @@ const Nav = () => {
           icon: "success",
         });
       }
+      navigate("/login");
     });
   };
   useEffect(() => {
@@ -98,12 +99,12 @@ const Nav = () => {
                       </Link>
                     </li>
                     <li>
-                      <a
-                        href="#"
+                      <Link
+                        to={"/manageevents"}
                         className="block px-2 md:px-3 py-1 md:py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
                         Manage Events
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <Link

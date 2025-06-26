@@ -10,12 +10,14 @@ const EventDetails = () => {
   const {
     eventType,
     description,
-    eventDate,
+    date,
     location,
     organizer,
     photoURL,
     title,
     _id,
+    name,
+    email,
   } = event;
   //   console.log(event._id);
   //   console.log(user.email);
@@ -124,7 +126,28 @@ const EventDetails = () => {
                   >
                     Event Date:
                   </th>
-                  <td class="px-6 py-4 text-sm lg:text-xl">{eventDate}</td>
+                  <td class="px-6 py-4 text-sm lg:text-xl">{date}</td>
+                </tr>
+                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-bold text-sm lg:text-xl text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    Event created by :
+                  </th>
+                  <td class="px-6  text-sm lg:text-xl">
+                    {name} <br />
+                    <span className=" text-[10px] lg:text-sm">{email}</span>
+                  </td>
+                </tr>
+                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                  <th
+                    scope="row"
+                    class="px-6 py-4 font-bold text-sm lg:text-xl text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    Event Date:
+                  </th>
+                  <td class="px-6 py-4 text-sm lg:text-xl">{date}</td>
                 </tr>
               </tbody>
             </table>
