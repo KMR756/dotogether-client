@@ -1,9 +1,14 @@
 import React, { use } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
+import toast, { ToastBar, Toaster } from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const Registration = () => {
-  const { createUser } = use(AuthContext);
+  const { createUser, updateUser, setUser } = use(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -11,15 +16,59 @@ const Registration = () => {
     const email = form.email.value;
     const photo = form.photo.value;
     const password = form.password.value;
+    console.log({ name, email, photo, password });
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const isLongEnough = password.length >= 6;
 
-    console.log(name, email, photo, password);
+    if (!hasUppercase || !hasLowercase || !isLongEnough) {
+      // console.log("worng pass");
+
+      toast.error(
+        <>
+          Password must have at least:
+          <br />• One uppercase letter
+          <br />• One lowercase letter
+          <br />• Minimum 6 characters
+        </>,
+        {
+          duration: 4000,
+          position: "top-center",
+        }
+      );
+      return;
+    }
     createUser(email, password)
       .then((result) => {
-        console.log(result.user);
+        // Signed up
+        const user = result.user;
+        navigate(`${location.state ? location.state : "/"}`);
+        updateUser({ displayName: name, photoURL: photo })
+          .then(() => {
+            setUser({ ...user, displayName: name, photoURL: photo });
+            Swal.fire({
+              position: "top-middle",
+              icon: "success",
+              title: "Registration successfully!!",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+          })
+          .catch((error) => {
+            toast.error(error, { duration: 3000, position: "top-right" });
+            setUser(user);
+          });
       })
       .catch((error) => {
-        console.log(error);
+        // const errorCode = error.code;
+        const errorMessage = error.message;
+        toast.error(errorMessage, {
+          duration: 3000,
+          position: "top-right",
+        });
+        // ..
       });
+    e.target.reset();
   };
   return (
     <div>
@@ -45,7 +94,7 @@ const Registration = () => {
                     id="name"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter Your Name"
-                    required=""
+                    required
                   ></input>
                 </div>
                 <div>
@@ -58,7 +107,7 @@ const Registration = () => {
                     id="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="example@gmail.com"
-                    required=""
+                    required
                   ></input>
                 </div>
                 <div>
@@ -71,7 +120,7 @@ const Registration = () => {
                     id="photo"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter Your Photo URL"
-                    required=""
+                    required
                   ></input>
                 </div>
                 <div>
@@ -84,7 +133,7 @@ const Registration = () => {
                     id="password"
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required=""
+                    required
                   ></input>
                 </div>
 

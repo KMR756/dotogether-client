@@ -3,21 +3,39 @@ import userImg from "../assets/user.png";
 import DarkMoodBtn from "./DarkMoodBtn";
 import { Link } from "react-router";
 import { AuthContext } from "../context/AuthContext";
+import Swal from "sweetalert2";
 
 const Nav = () => {
   const { user, singOutUser } = use(AuthContext);
-  // console.log(user);
+  console.log(user);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const handleSingOut = () => {
-    singOutUser()
-      .then(() => {
-        console.log("sing out successfully");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    Swal.fire({
+      title: "Are you sure?",
+
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Log Out!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        singOutUser()
+          .then(() => {
+            // console.log("sing out successfully");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        Swal.fire({
+          title: "Log Out!",
+
+          icon: "success",
+        });
+      }
+    });
   };
   useEffect(() => {
     function handleClickOutside(event) {
@@ -63,7 +81,7 @@ const Nav = () => {
               <button onClick={() => setDropdownOpen(!dropdownOpen)}>
                 <img
                   src={user.photoURL || userImg}
-                  className="w-7 md:w-13 h-7 md:h-13 mr-2 md:mr-4 rounded-full"
+                  className="w-7 md:w-13 h-7 md:h-13 mr-2 md:mr-4 rounded-full object-cover"
                   alt="User"
                 />
               </button>

@@ -1,6 +1,8 @@
 import React, { use } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { logInUser, googleLogin } = use(AuthContext);
@@ -11,10 +13,21 @@ const Login = () => {
     googleLogin()
       .then((result) => {
         console.log(result.user);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Log In successfully!!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate(from);
       })
       .catch((error) => {
-        console.log(error);
+        const errorCode = error.code;
+        // const errorMessage = error.message;
+        // console.log(errorMessage);
+        // console.log(errorCode);
+        toast.error(errorCode);
       });
   };
   const handleLogin = (e) => {
@@ -26,10 +39,21 @@ const Login = () => {
     logInUser(email, password)
       .then((result) => {
         console.log(result.user);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Log In successfully!!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate(from);
       })
       .catch((error) => {
-        console.log(error);
+        const errorCode = error.code;
+        // const errorMessage = error.message;
+        // console.log(errorMessage);
+        // console.log(errorCode);
+        toast.error(errorCode);
       });
   };
   return (
@@ -52,7 +76,7 @@ const Login = () => {
                     id="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="example@gmail.com"
-                    required=""
+                    required
                   ></input>
                 </div>
                 <div>
@@ -65,7 +89,7 @@ const Login = () => {
                     id="password"
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required=""
+                    required
                   ></input>
                 </div>
 
