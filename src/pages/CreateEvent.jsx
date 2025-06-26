@@ -1,22 +1,55 @@
-import React from "react";
+import React, { use } from "react";
+import { AuthContext } from "../context/AuthContext";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const CreateEvent = () => {
+  const navigate = useNavigate();
+  const { user } = use(AuthContext);
+  console.log(user);
+  const handleCreateEvent = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    console.log(data);
+    axios
+      .post("http://localhost:3000/events", data)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Event created successfully.",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/manageevents");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <>
-      <div class="w-7/12 mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
-        <div class="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase">
+      <div class="w-7/12 mx-auto mt-10 bg-white dark:bg-gray-500 shadow-lg rounded-lg overflow-hidden">
+        <div class="text-2xl bg-[#4ED7F1] dark:bg-[#1A1A1D] text-[#3A0519] dark:text-[#FF6363] py-4 px-6   text-center font-bold uppercase">
           Create your event
         </div>
-        <form class="py-4 px-6" action="" method="POST">
+        <form onSubmit={handleCreateEvent} class="py-4 px-6">
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="name">
               Name
             </label>
             <input
+              name="name"
               class="shadow appearance-none border rounded w-full bg-gray-200 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="name"
               type="text"
-              placeholder="Enter your name"
+              defaultValue={user.displayName}
+              readOnly
             ></input>
           </div>
           <div class="mb-4">
@@ -24,10 +57,12 @@ const CreateEvent = () => {
               Email
             </label>
             <input
+              name="email"
               class="shadow appearance-none border rounded w-full bg-gray-200 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="email"
               type="email"
-              placeholder="Enter your email"
+              defaultValue={user.email}
+              readOnly
             ></input>
           </div>
           <div class="mb-4">
@@ -35,10 +70,12 @@ const CreateEvent = () => {
               PhotoURL
             </label>
             <input
+              name="photoURL"
               class="shadow appearance-none border rounded w-full bg-gray-200 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="phone"
               type="photo"
               placeholder="Enter your photo url"
+              required
             ></input>
           </div>
           <div class="mb-4">
@@ -46,10 +83,11 @@ const CreateEvent = () => {
               Title
             </label>
             <input
+              name="title"
               class="shadow appearance-none border rounded w-full bg-gray-200 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="phone"
               type="text"
-              placeholder="Enter your photo url"
+              placeholder="Enter your event title"
+              required
             ></input>
           </div>
           <div class="mb-4">
@@ -57,10 +95,12 @@ const CreateEvent = () => {
               Description
             </label>
             <textarea
+              name="description"
               class="shadow bg-gray-200  appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="message"
               rows="4"
-              placeholder="Enter any additional information"
+              placeholder="Enter your event description"
+              required
             ></textarea>
           </div>
           <div class="mb-4">
@@ -70,13 +110,21 @@ const CreateEvent = () => {
             <select
               class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-200 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="service"
-              name="service"
+              name="eventType"
+              required
             >
-              <option value="">Select a Type</option>
-              <option value="haircut">Haircut</option>
-              <option value="coloring">Coloring</option>
-              <option value="styling">Styling</option>
-              <option value="facial">Facial</option>
+              <option value="">Tree Plantation</option>
+              <option value="Road/Beach Cleaning">Road/Beach Cleaning</option>
+              <option value="Park Beautification">Park Beautification</option>
+              <option value="Recycling Drives">Recycling Drives</option>
+              <option value="Waterway Cleanup">Waterway Cleanup</option>
+              <option value="Food Distribution">Food Distribution</option>
+              <option value="Blood Donation Camp">Blood Donation Camp</option>
+              <option value="Clothing Drive">Clothing Drive</option>
+              <option value="Free Medical Checkup">Free Medical Checkup</option>
+              <option value="Shelter Support Programs">
+                Shelter Support Programs
+              </option>
             </select>
           </div>
 
@@ -85,10 +133,12 @@ const CreateEvent = () => {
               Organizer
             </label>
             <input
+              name="organizer"
               class="shadow appearance-none border rounded w-full bg-gray-200 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="phone"
               type="text"
-              placeholder="Enter your photo url"
+              placeholder="Enter your event organizer"
+              required
             ></input>
           </div>
           <div class="mb-4">
@@ -96,10 +146,12 @@ const CreateEvent = () => {
               Location
             </label>
             <input
+              name="location"
               class="shadow appearance-none border rounded w-full bg-gray-200 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="phone"
               type="text"
-              placeholder="Enter your photo url"
+              placeholder="Enter your event location"
+              required
             ></input>
           </div>
           <div class="mb-4">
@@ -107,15 +159,17 @@ const CreateEvent = () => {
               Date
             </label>
             <input
-              class="shadow appearance-none border rounded w-full py-2 bg-gray-200 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              name="date"
+              class="inter shadow appearance-none border rounded w-full py-2 bg-gray-200 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="date"
               placeholder="Select a date"
+              required
             ></input>
           </div>
 
           <div class="flex items-center justify-center mb-4">
             <button
-              class="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
+              class="inter font-bold bg-[#4ED7F1] dark:bg-[#1A1A1D] text-[#3A0519] dark:text-[#FF6363] py-2 px-4 rounded hover:bg-[#78c1cf] focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Create Event

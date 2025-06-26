@@ -5,10 +5,12 @@ import { Fade } from "react-awesome-reveal";
 
 const UpcomingEvents = () => {
   const events = useLoaderData();
-  console.log(events);
+  // console.log(events);
   const upcomingEvents = events.filter(
-    (event) => new Date(event.eventDate) >= new Date()
+    (event) => new Date(event.date) >= new Date()
   );
+  console.log(upcomingEvents);
+  console.log(new Date());
 
   return (
     <>

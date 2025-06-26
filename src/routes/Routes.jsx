@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import Loading from "../Components/Loading";
 import MyJoined from "../pages/MyJoined";
 import CreateEvent from "../pages/CreateEvent";
+import ManageEvents from "../pages/ManageEvents";
 
 export const routes = createBrowserRouter([
   {
@@ -51,6 +52,14 @@ export const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <CreateEvent></CreateEvent>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/manageevents",
+        element: (
+          <PrivateRoute>
+            <ManageEvents></ManageEvents>
           </PrivateRoute>
         ),
       },

@@ -6,7 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 
 const Nav = () => {
   const { user, singOutUser } = use(AuthContext);
-  console.log(user);
+  // console.log(user);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);

@@ -5,8 +5,8 @@ import { MdDateRange } from "react-icons/md";
 import { IoLocationSharp } from "react-icons/io5";
 
 const UpcomingEventsCard = ({ event }) => {
-  const { title, photoURL, description, _id, eventDate, location } = event;
-  // console.log(event);
+  const { title, photoURL, description, _id, date, location } = event;
+  console.log(event);
 
   return (
     <>
@@ -21,7 +21,7 @@ const UpcomingEventsCard = ({ event }) => {
             <div className="flex gap-1 border-transparent bg-amber-500 p-1 rounded-2xl">
               <MdDateRange />
               <p className="text-[10px] text-gray-900 dark:text-white inter">
-                {eventDate}
+                {date}
               </p>
             </div>
             <div className="flex gap-1 border-transparent bg-amber-500 p-1 rounded-2xl">

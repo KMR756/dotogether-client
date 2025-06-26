@@ -24,10 +24,10 @@ const JoinedEventsRowMap = ({ event }) => {
           alt="event image"
         ></img>
         <div class="ps-1 lg:ps-3">
-          <div class="inter font-normal  lg:font-semibold px-6 py-1 lg:py-4 text-[10px] lg:text-xl">
+          <div class="inter font-normal  lg:font-semibold px-6 py-1 lg:py-2 text-[10px] lg:text-xl">
             {title}
           </div>
-          <div class="inter font-normal  lg:font-semibold px-6 py-1 lg:py-4 text-[10px] lg:text-xl text-gray-500">
+          <div class="inter font-normal  lg:font-semibold px-6 py-1 lg:py-2 text-[10px] lg:text-xl text-gray-500">
             {userEmail}
           </div>
         </div>
