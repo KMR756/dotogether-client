@@ -2,11 +2,12 @@ import React, { Suspense, use } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Loading from "../Components/Loading";
 import MyeventList from "../Components/MyeventList";
+import axios from "axios";
 
 const myEventsPromise = (email) => {
-  return fetch(`http://localhost:3000/jointevent?email=${email}`).then((res) =>
-    res.json()
-  );
+  return axios
+    .get(`http://localhost:3000/jointevent?email=${email}`)
+    .then((res) => res.data);
 };
 
 const ManageEvents = () => {
