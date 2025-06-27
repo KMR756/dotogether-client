@@ -1,24 +1,27 @@
-import React, { Suspense, use } from "react";
+import React, { Suspense } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Loading from "../Components/Loading";
 import MyeventList from "../Components/MyeventList";
-import axios from "axios";
-
-const myEventsPromise = (email) => {
-  return axios
-    .get(`http://localhost:3000/jointevent?email=${email}`)
-    .then((res) => res.data);
-};
+import { useLoaderData } from "react-router";
+import { Fade } from "react-awesome-reveal";
+import MyEventsCard from "../Components/MyEventsCard";
 
 const ManageEvents = () => {
-  const { user } = use(AuthContext);
+  const data = useLoaderData();
+  // console.log(data.data);
+
   return (
     <>
-      <Suspense fallback={<Loading></Loading>}>
-        <MyeventList
-          myEventsPromise={myEventsPromise(user.email)}
-        ></MyeventList>
-      </Suspense>
+      <Fade direction="up" duration={2000} triggerOnce>
+        <h1 className="w-10/12 mx-auto text-center text-4xl md:text-7xl dark:text-white text-[#FF6363] inter font-black my-8 md:my-15">
+          My all events
+        </h1>
+      </Fade>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  w-10/12 mx-auto gap-2 md:gap-10">
+        {data.data.map((events) => (
+          <MyEventsCard key={events._id} events={events}></MyEventsCard>
+        ))}
+      </div>
     </>
   );
 };

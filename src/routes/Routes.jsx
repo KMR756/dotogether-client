@@ -11,6 +11,7 @@ import Loading from "../Components/Loading";
 import MyJoined from "../pages/MyJoined";
 import CreateEvent from "../pages/CreateEvent";
 import ManageEvents from "../pages/ManageEvents";
+import axios from "axios";
 
 export const routes = createBrowserRouter([
   {
@@ -24,14 +25,14 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/upcomingevents",
-        loader: () => fetch("http://localhost:3000/events"),
+        loader: () => axios(`${import.meta.env.VITE_API_URL}/events`),
         hydrateFallbackElement: <Loading></Loading>,
         Component: UpcomingEvents,
       },
       {
         path: "/upcomingevents/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/events/${params.id}`),
+          axios(`${import.meta.env.VITE_API_URL}/events/${params.id}`),
         hydrateFallbackElement: <Loading></Loading>,
         element: (
           <PrivateRoute>
@@ -56,7 +57,10 @@ export const routes = createBrowserRouter([
         ),
       },
       {
-        path: "/manageevents",
+        path: "/manageevents/:email",
+        loader: ({ params }) =>
+          axios(`${import.meta.env.VITE_API_URL}/myevents/${params.email}`),
+        hydrateFallbackElement: <Loading></Loading>,
         element: (
           <PrivateRoute>
             <ManageEvents></ManageEvents>

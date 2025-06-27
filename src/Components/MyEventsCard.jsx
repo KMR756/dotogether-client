@@ -1,15 +1,18 @@
+import { useState } from "react";
 import { Zoom } from "react-awesome-reveal";
 import { IoLocationSharp } from "react-icons/io5";
 import { MdDateRange } from "react-icons/md";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 
-const MyEventsCard = ({ event }) => {
-  console.log(event);
+const MyEventsCard = ({ events }) => {
+  const myAllEvents = events;
+  // console.log(myAllEvents);
 
-  const { photoURL, date, title, description, _id, location } = event;
+  const [MyEvents, setMYEvents] = useState(myAllEvents);
+  const { photoURL, date, title, description, _id, location } = events;
+
   const handleEventDelete = (_id) => {
-    console.log(_id);
     Swal.fire({
       title: "Are you sure?",
       text: `You want to delete ${title}`,
@@ -25,16 +28,21 @@ const MyEventsCard = ({ event }) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log("after delete", data);
+            if (data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+              setMYEvents((prevEvents) =>
+                prevEvents.filter((event) => event._id !== _id)
+              );
+            }
           });
-        // Swal.fire({
-        //   title: "Deleted!",
-        //   text: "Your file has been deleted.",
-        //   icon: "success",
-        // });
       }
     });
   };
+
   return (
     <>
       <Zoom duration={500} triggerOnce>

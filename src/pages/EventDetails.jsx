@@ -6,7 +6,9 @@ import Swal from "sweetalert2";
 
 const EventDetails = () => {
   const event = useLoaderData();
-  const { user } = use(AuthContext);
+  console.log(event.data);
+
+  // const { user } = use(AuthContext);
   const {
     eventType,
     description,
@@ -18,7 +20,7 @@ const EventDetails = () => {
     _id,
     name,
     email,
-  } = event;
+  } = event.data;
   //   console.log(event._id);
   //   console.log(user.email);
   const navigate = useNavigate();
@@ -139,15 +141,6 @@ const EventDetails = () => {
                     {name} <br />
                     <span className=" text-[10px] lg:text-sm">{email}</span>
                   </td>
-                </tr>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-bold text-sm lg:text-xl text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    Event Date:
-                  </th>
-                  <td class="px-6 py-4 text-sm lg:text-xl">{date}</td>
                 </tr>
               </tbody>
             </table>

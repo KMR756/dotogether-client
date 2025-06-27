@@ -1,36 +1,48 @@
 import React, { use } from "react";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const CreateEvent = () => {
   const navigate = useNavigate();
   const { user } = use(AuthContext);
-  console.log(user);
+  // console.log(user);
   const handleCreateEvent = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-    console.log(data);
+    const eventData = Object.fromEntries(formData.entries());
+    console.log(eventData);
+
     axios
-      .post("http://localhost:3000/events", data)
-      .then((res) => {
-        if (res.data.insertedId) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Event created successfully.",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate("/manageevents");
-        }
+      .post(`${import.meta.env.VITE_API_URL}/add-event`, eventData)
+      .then((data) => {
+        console.log(data.data);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${eventData.title} is created successfully..`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        navigate("/manageevents");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
       });
+    // console.log(data);
+    // fetch(`${import.meta.env.VITE_API_URL}/add-event`, {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(data),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //   });
   };
   return (
     <>

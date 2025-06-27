@@ -7,14 +7,13 @@ import Swal from "sweetalert2";
 
 const Nav = () => {
   const { user, singOutUser } = use(AuthContext);
-  console.log(user);
+  // console.log(user);
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const handleSingOut = () => {
     Swal.fire({
       title: "Are you sure?",
-
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -24,20 +23,21 @@ const Nav = () => {
       if (result.isConfirmed) {
         singOutUser()
           .then(() => {
-            // console.log("sing out successfully");
+            Swal.fire({
+              title: "Logged Out!",
+              icon: "success",
+            }).then(() => {
+              // Redirect after user confirms the alert
+              navigate("/login");
+            });
           })
           .catch((error) => {
             console.log(error);
           });
-        Swal.fire({
-          title: "Log Out!",
-
-          icon: "success",
-        });
       }
-      navigate("/login");
     });
   };
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -100,7 +100,7 @@ const Nav = () => {
                     </li>
                     <li>
                       <Link
-                        to={"/manageevents"}
+                        to={`/manageevents/${user?.email}`}
                         className="block px-2 md:px-3 py-1 md:py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
                         Manage Events
