@@ -48,7 +48,7 @@ const EventDetails = () => {
     };
 
     axios
-      .post("http://localhost:3000/joined-event", eventJointUser)
+      .post(`${import.meta.env.VITE_API_URL}/joined-event`, eventJointUser)
       .then((res) => {
         if (res.data.message === "already_joined") {
           Swal.fire({

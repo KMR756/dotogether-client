@@ -4,9 +4,9 @@ import Loading from "../Components/Loading";
 import { AuthContext } from "../context/AuthContext";
 
 const myJoinedPromise = (email) => {
-  return fetch(`http://localhost:3000/jointevent?email=${email}`).then((res) =>
-    res.json()
-  );
+  return fetch(
+    `${import.meta.env.VITE_API_URL}/jointevent?email=${email}`
+  ).then((res) => res.json());
 };
 
 const MyJoined = () => {

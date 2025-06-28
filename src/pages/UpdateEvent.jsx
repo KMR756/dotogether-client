@@ -30,7 +30,7 @@ const UpdateEvent = () => {
     const UpdateEventData = Object.fromEntries(formData.entries());
     console.log(UpdateEventData);
 
-    fetch(`http://localhost:3000/events/${_id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/events/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

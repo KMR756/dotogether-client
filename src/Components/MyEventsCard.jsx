@@ -22,7 +22,7 @@ const MyEventsCard = ({ event, onDelete }) => {
       if (result.isConfirmed) {
         setIsDeleting(true);
 
-        fetch(`http://localhost:3000/events/${id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/events/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
