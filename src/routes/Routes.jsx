@@ -13,6 +13,7 @@ import CreateEvent from "../pages/CreateEvent";
 import ManageEvents from "../pages/ManageEvents";
 import axios from "axios";
 import UpdateEvent from "../pages/UpdateEvent";
+import MyJoinedEvents from "../Components/MyJoinedEvents";
 
 export const routes = createBrowserRouter([
   {
@@ -45,7 +46,7 @@ export const routes = createBrowserRouter([
         path: "/myjoinedevents",
         element: (
           <PrivateRoute>
-            <MyJoined></MyJoined>
+            <MyJoinedEvents></MyJoinedEvents>
           </PrivateRoute>
         ),
       },

@@ -2,6 +2,7 @@
 import { useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import { use } from "react";
+import Swal from "sweetalert2";
 // import { AuthContext } from "../context/AuthContext";
 
 const UpdateEvent = () => {
@@ -39,6 +40,13 @@ const UpdateEvent = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${title} updated successfully..`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
           navigate(`/manageevents/${user.email}`);
         }
       });

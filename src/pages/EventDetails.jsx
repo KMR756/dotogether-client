@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { useContext } from "react";
 import { useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
@@ -6,9 +6,9 @@ import Swal from "sweetalert2";
 
 const EventDetails = () => {
   const event = useLoaderData();
-  console.log(event.data);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  // const { user } = use(AuthContext);
   const {
     eventType,
     description,
@@ -21,134 +21,114 @@ const EventDetails = () => {
     name,
     email,
   } = event.data;
-  //   console.log(event._id);
-  //   console.log(user.email);
-  const navigate = useNavigate();
+
   const handleJointEvent = () => {
+    if (!user || !user.email) {
+      Swal.fire({
+        icon: "warning",
+        title: "Login Required",
+        text: "Please login to join events",
+        confirmButtonText: "Go to Login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+      return;
+    }
+
     const eventJointUser = {
       eventId: _id,
       userEmail: user.email,
+      title,
+      date,
+      location,
+      photoURL,
+      joinedAt: new Date().toISOString(),
     };
 
     axios
-      .post("http://localhost:3000/jointevent", eventJointUser)
+      .post("http://localhost:3000/joined-event", eventJointUser)
       .then((res) => {
-        console.log(res.data);
-
-        if (res.data.joinedBefore) {
+        if (res.data.message === "already_joined") {
           Swal.fire({
-            position: "top-end",
-            icon: "error",
-            title: `Already joined "${title}"`,
-            showConfirmButton: false,
-            timer: 2000,
+            icon: "info",
+            title: "Already Joined",
+            text: `You've already joined "${title}"`,
           });
           return;
         }
 
         if (res.data.insertedId) {
           Swal.fire({
-            position: "top-end",
+            position: "center",
             icon: "success",
-            title: `You successfully joined "${title}"`,
+            title: `Successfully joined "${title}"`,
             showConfirmButton: false,
-            timer: 2000,
+            timer: 1500,
           });
           navigate("/myjoinedevents");
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.error("Join error:", error);
         Swal.fire({
           icon: "error",
-          title: "Something went wrong",
-          text: "Please try again later.",
+          title: "Join Failed",
+          text: error.response?.data?.message || "Please try again later",
         });
       });
   };
 
   return (
-    <>
-      <div className="my-20 w-10/12 mx-auto flex flex-col  bg-white border border-gray-200 rounded-lg shadow-sm md:flex-row   dark:border-gray-700 dark:bg-gray-800 ">
-        <div className="p-2 lg:p-10  flex flex-col items-center">
+    <div className="my-10 md:my-20 w-11/12 max-w-6xl mx-auto">
+      <div className="flex flex-col md:flex-row bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800">
+        <div className="p-5 lg:p-8 flex flex-col items-center w-full md:w-2/5">
           <img
-            className="object-cover   w-[600px] max-h-[280px] rounded-2xl"
+            className="object-cover w-full h-64 md:h-80 rounded-xl"
             src={photoURL}
-            alt=""
-          ></img>
+            alt={title}
+          />
           <button
             onClick={handleJointEvent}
-            type="button"
-            class="inter mt-10 text-white  dark:text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl   font-bold rounded-lg text-xl px-5 py-2.5 text-center me-2 mb-2"
+            className="mt-8 w-full py-3 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:from-red-300 hover:to-yellow-300 text-gray-900 font-bold rounded-lg text-lg transition-all duration-300"
           >
-            Joint Event
+            Join Event
           </button>
         </div>
-        <div className="flex flex-col mt-4 mx-5 lg:mx-0 lg:mt-15 ">
-          <h5 className="inter mb-2 text-3xl md:text-xl xl:text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+
+        <div className="p-5 lg:p-8 w-full md:w-3/5">
+          <h1 className="text-3xl lg:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
             {title}
-          </h5>
-          <p className="inter mb-3 font-normal text-xl md:text-sm xl:text-xl  text-gray-700 dark:text-gray-400">
+          </h1>
+
+          <p className="mb-6 text-gray-700 dark:text-gray-300 text-lg">
             {description}
           </p>
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg my-10">
-            <table class="w-full  text-left rtl:text-right text-gray-500 dark:text-gray-400">
-              <tbody>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-bold text-sm lg:text-xl  text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    Event type:
-                  </th>
-                  <td class="px-6 py-4 text-sm lg:text-xl">{eventType}</td>
-                </tr>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-bold text-sm lg:text-xl text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    Location:
-                  </th>
-                  <td class="px-6 py-4 text-sm lg:text-xl">{location}</td>
-                </tr>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-bold text-sm lg:text-xl text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    Organizer:
-                  </th>
-                  <td class="px-6 py-4 text-sm lg:text-xl">{organizer}</td>
-                </tr>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-bold text-sm lg:text-xl text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    Event Date:
-                  </th>
-                  <td class="px-6 py-4 text-sm lg:text-xl">{date}</td>
-                </tr>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-bold text-sm lg:text-xl text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    Event created by :
-                  </th>
-                  <td class="px-6  text-sm lg:text-xl">
-                    {name} <br />
-                    <span className=" text-[10px] lg:text-sm">{email}</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+
+          <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <DetailItem label="Event Type" value={eventType} />
+              <DetailItem label="Location" value={location} />
+              <DetailItem label="Organizer" value={organizer} />
+              <DetailItem label="Event Date" value={date} />
+              <DetailItem label="Created By" value={`${name} (${email})`} />
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
+
+// Helper component for detail items
+const DetailItem = ({ label, value }) => (
+  <div className="mb-3">
+    <h3 className="font-semibold text-gray-600 dark:text-gray-400 text-sm">
+      {label}
+    </h3>
+    <p className="text-gray-900 dark:text-white text-lg">{value}</p>
+  </div>
+);
 
 export default EventDetails;
