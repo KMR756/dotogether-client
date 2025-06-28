@@ -12,6 +12,7 @@ import MyJoined from "../pages/MyJoined";
 import CreateEvent from "../pages/CreateEvent";
 import ManageEvents from "../pages/ManageEvents";
 import axios from "axios";
+import UpdateEvent from "../pages/UpdateEvent";
 
 export const routes = createBrowserRouter([
   {
@@ -64,6 +65,17 @@ export const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ManageEvents></ManageEvents>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update/:id",
+        loader: ({ params }) =>
+          axios(`${import.meta.env.VITE_API_URL}/events/${params.id}`),
+        hydrateFallbackElement: <Loading></Loading>,
+        element: (
+          <PrivateRoute>
+            <UpdateEvent></UpdateEvent>
           </PrivateRoute>
         ),
       },

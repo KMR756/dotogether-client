@@ -1,14 +1,16 @@
-import React, { Suspense } from "react";
-import { AuthContext } from "../context/AuthContext";
-import Loading from "../Components/Loading";
-import MyeventList from "../Components/MyeventList";
+import React, { useState } from "react";
 import { useLoaderData } from "react-router";
 import { Fade } from "react-awesome-reveal";
 import MyEventsCard from "../Components/MyEventsCard";
+import Loading from "../Components/Loading";
 
 const ManageEvents = () => {
   const data = useLoaderData();
-  // console.log(data.data);
+  const [events, setEvents] = useState(data.data);
+
+  const handleDeleteEvent = (id) => {
+    setEvents((prevEvents) => prevEvents.filter((event) => event._id !== id));
+  };
 
   return (
     <>
@@ -17,11 +19,22 @@ const ManageEvents = () => {
           My all events
         </h1>
       </Fade>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  w-10/12 mx-auto gap-2 md:gap-10">
-        {data.data.map((events) => (
-          <MyEventsCard key={events._id} events={events}></MyEventsCard>
-        ))}
-      </div>
+
+      {events.length === 0 ? (
+        <div className="text-center py-20">
+          <p className="text-2xl dark:text-white">No events found</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-10/12 mx-auto gap-2 md:gap-10">
+          {events.map((event) => (
+            <MyEventsCard
+              key={event._id}
+              event={event}
+              onDelete={handleDeleteEvent}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 };
