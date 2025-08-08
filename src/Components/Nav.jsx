@@ -4,12 +4,15 @@ import DarkMoodBtn from "./DarkMoodBtn";
 import { Link, NavLink, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
+import Hamburger from "hamburger-react";
+import { slide as Menu } from "react-burger-menu";
 
 const Nav = () => {
   const { user, singOutUser } = use(AuthContext);
   // console.log(user);
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false);
   const dropdownRef = useRef(null);
   const handleSingOut = () => {
     Swal.fire({
@@ -51,7 +54,11 @@ const Nav = () => {
   return (
     <nav className="bg-[#4ED7F1] dark:bg-[#1A1A1D] sticky top-0 z-10">
       <div className="flex justify-between w-[95%] md:w-[90%] lg:w-10/12 mx-auto py-3">
-        <div>
+        <div className="flex items-center">
+          <div className="md:hidden">
+            <Hamburger size={20} toggled={isOpen} toggle={setOpen} />
+          </div>
+
           <Link to={"/"} className="flex  flex-col">
             <span className="self-center flex caprasimo font-bold text-xs md:text-xl lg:text-2xl xl:text-3xl text-[#3A0519] dark:text-[#FF6363]">
               DoTogether
@@ -62,11 +69,11 @@ const Nav = () => {
           </Link>
         </div>
 
-        <div className="flex gap-3 items-center">
+        <div className="md:flex gap-3 items-center hidden">
           <NavLink
             to="/upcomingevents"
             className={({ isActive }) =>
-              `relative inline-flex items-center justify-center p-0.5 mb-0 md:mb-2 me-2 overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 
+              `relative  inline-flex items-center justify-center p-0.5 mb-0 md:mb-2 me-2 overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 
     ${
       isActive
         ? "text-white"
@@ -160,6 +167,109 @@ const Nav = () => {
             )}
           </NavLink>
         </div>
+        {isOpen && (
+          <div className="absolute top-18 left-3  w-[150px] bg-white shadow-lg flex flex-col items-start p-4 gap-3 md:static md:flex-row md:bg-transparent md:shadow-none md:p-0 z-50">
+            <NavLink
+              to="/upcomingevents"
+              className={({ isActive }) =>
+                `relative inline-flex items-center justify-center p-0.5 w-full overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 
+        ${
+          isActive
+            ? "text-white"
+            : "text-[#3A0519] hover:text-white dark:text-[#FBFBFB]"
+        }`
+              }
+            >
+              {({ isActive }) => (
+                <span
+                  className={`relative md:font-semibold w-full inter text-[10px] font-bold md:text-xs px-2 py-2 transition-all ease-in duration-75 rounded-md
+          ${
+            isActive
+              ? "bg-transparent group-hover:bg-transparent"
+              : "bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent"
+          }`}
+                >
+                  Upcoming Events
+                </span>
+              )}
+            </NavLink>
+
+            <NavLink
+              to="/gallery"
+              className={({ isActive }) =>
+                `relative inline-flex items-center justify-center p-0.5 w-full overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 
+        ${
+          isActive
+            ? "text-white"
+            : "text-[#3A0519] hover:text-white dark:text-[#FBFBFB]"
+        }`
+              }
+            >
+              {({ isActive }) => (
+                <span
+                  className={`relative md:font-semibold inter w-full text-[10px] font-bold md:text-xs px-2 py-2 transition-all ease-in duration-75 rounded-md
+          ${
+            isActive
+              ? "bg-transparent group-hover:bg-transparent"
+              : "bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent"
+          }`}
+                >
+                  Gallery
+                </span>
+              )}
+            </NavLink>
+
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                `relative inline-flex items-center w-full justify-center p-0.5 overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 
+        ${
+          isActive
+            ? "text-white"
+            : "text-[#3A0519] hover:text-white dark:text-[#FBFBFB]"
+        }`
+              }
+            >
+              {({ isActive }) => (
+                <span
+                  className={`relative w-full md:font-semibold inter text-[10px] font-bold md:text-xs px-2 py-2 transition-all ease-in duration-75 rounded-md
+          ${
+            isActive
+              ? "bg-transparent group-hover:bg-transparent"
+              : "bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent"
+          }`}
+                >
+                  About Us
+                </span>
+              )}
+            </NavLink>
+
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                `relative inline-flex w-full items-center justify-center p-0.5 overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 
+        ${
+          isActive
+            ? "text-white"
+            : "text-[#3A0519] hover:text-white dark:text-[#FBFBFB]"
+        }`
+              }
+            >
+              {({ isActive }) => (
+                <span
+                  className={`relative w-full md:font-semibold inter text-[10px] font-bold md:text-xs px-2 py-2 transition-all ease-in duration-75 rounded-md
+          ${
+            isActive
+              ? "bg-transparent group-hover:bg-transparent"
+              : "bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent"
+          }`}
+                >
+                  Contact Us
+                </span>
+              )}
+            </NavLink>
+          </div>
+        )}
 
         <div className="flex items-center space-x-2 relative" ref={dropdownRef}>
           {user && (
