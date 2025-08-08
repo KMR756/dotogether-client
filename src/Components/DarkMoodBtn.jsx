@@ -10,13 +10,13 @@ const DarkMoodBtn = () => {
         <img
           src={sun}
           alt=""
-          className="w-5 md:w-12 h-5 md:h-12 ml-0 md:ml-4 mb-0 xl:mb-2"
+          className="w-5 md:w-8 h-5 md:h-8 ml-0 md:ml-4 mb-0 "
         />
       ) : (
         <img
           src={moon}
           alt=""
-          className="w-5 md:w-12 h-5 md:h-12 ml-0 md:ml-4 mb-0 xl:mb-2"
+          className="w-5 md:w-8 h-5 md:h-8 ml-0 md:ml-4 mb-0 "
         />
       )}
     </button>
