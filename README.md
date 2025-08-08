@@ -1,12 +1,48 @@
-# React + Vite
+# 🤝 DoTogether
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**DoTogether** is a community-driven social development event platform where users can **create**, **join**, and **track** local service-oriented events — from road cleanups to tree plantation drives. The platform encourages civic engagement and grassroots collaboration for a better tomorrow.
 
-Currently, two official plugins are available:
+🌐 **Live Site:** [https://do-together-743ba.web.app/](https://do-together-743ba.web.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🌟 Key Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 📝 Create and manage local social service events
+- 🧑‍🤝‍🧑 Join events with real-time tracking and participation
+- 📍 Discover events near you (e.g. *“Tree Plantation - Hossainpur”*)
+- 🕒 Track ongoing and past participation
+- 🔐 Firebase authentication & data management
+- 🎨 Elegant UI with smooth animations and dark/light theme
+- 📱 Fully responsive across devices
+- 🔔 Toast & modal-based feedback system
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology         | Purpose                                 |
+|--------------------|------------------------------------------|
+| **React 19**        | Frontend UI framework                   |
+| **Firebase**        | Auth, Firestore DB, and hosting         |
+| **Tailwind CSS**    | Utility-first styling                   |
+| **React Router**    | Client-side routing                     |
+| **Axios**           | API requests and data handling          |
+| **SweetAlert2**     | Beautiful modals for interactions       |
+| **React Toast / Hot Toast** | Notifications and alerts     |
+| **Lottie / Motion** | Animations and transitions              |
+| **Moment.js**       | Date formatting                         |
+| **Typewriter, CountUp, Awesome Reveal** | Engaging UI elements |
+
+---
+
+
+## 📦 Installation
+
+To run the project locally:
+
+```bash
+git clone https://github.com/yourusername/dotogether.git
+cd dotogether
+npm install
+npm run dev
