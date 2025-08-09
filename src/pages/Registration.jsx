@@ -142,7 +142,7 @@ const Registration = () => {
 
                 <button
                   type="submit"
-                  className="w-full inter text-[#FF6363] font-bold bg-indigo-300 hover:bg-indigo-500 transition-all duration-200 dark:text-white dark:bg-gray-500 dark:hover:bg-gray-700   rounded-lg text-sm px-5 py-2.5 text-center "
+                  className="w-full inter  font-bold   transition-all duration-200 bg-[#4ED7F1] dark:bg-[#1A1A1D] text-[#3A0519] dark:text-[#FF6363] rounded-lg    hover:bg-[#78c1cf] dark:hover:bg-gray-700 inter text-sm px-5 py-2.5 text-center "
                 >
                   Create an account
                 </button>
