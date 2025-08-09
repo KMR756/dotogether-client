@@ -14,6 +14,8 @@ import ManageEvents from "../pages/ManageEvents";
 import axios from "axios";
 import UpdateEvent from "../pages/UpdateEvent";
 import MyJoinedEvents from "../Components/MyJoinedEvents";
+import AboutUs from "../pages/AboutUs";
+import Contact from "../pages/Contract";
 
 export const routes = createBrowserRouter([
   {
@@ -87,6 +89,14 @@ export const routes = createBrowserRouter([
       {
         path: "/registration",
         Component: Registration,
+      },
+      {
+        path: "/about-us",
+        Component: AboutUs,
+      },
+      {
+        path: "/contract",
+        Component: Contact,
       },
     ],
   },

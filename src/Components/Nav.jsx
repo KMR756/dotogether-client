@@ -1,19 +1,26 @@
 import React, { useState, useRef, useEffect, use } from "react";
 import userImg from "../assets/user.png";
 import DarkMoodBtn from "./DarkMoodBtn";
-import { Link, NavLink, useNavigate } from "react-router";
+import {
+  NavLink,
+  useNavigate,
+  useLocation,
+  Link as RouterLink,
+} from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
 import Hamburger from "hamburger-react";
 import { slide as Menu } from "react-burger-menu";
+import { Link as ScrollLink } from "react-scroll";
 
 const Nav = () => {
   const { user, singOutUser } = use(AuthContext);
-  // console.log(user);
   const navigate = useNavigate();
+  const location = useLocation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isOpen, setOpen] = useState(false);
   const dropdownRef = useRef(null);
+
   const handleSingOut = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -30,7 +37,6 @@ const Nav = () => {
               title: "Logged Out!",
               icon: "success",
             }).then(() => {
-              // Redirect after user confirms the alert
               navigate("/login");
             });
           })
@@ -39,6 +45,12 @@ const Nav = () => {
           });
       }
     });
+  };
+
+  const handleGalleryClick = () => {
+    if (location.pathname !== "/") {
+      navigate("/", { state: { scrollToGallery: true } });
+    }
   };
 
   useEffect(() => {
@@ -59,218 +71,137 @@ const Nav = () => {
             <Hamburger size={20} toggled={isOpen} toggle={setOpen} />
           </div>
 
-          <Link to={"/"} className="flex  flex-col">
+          <RouterLink to="/" className="flex flex-col">
             <span className="self-center flex caprasimo font-bold text-xs md:text-xl lg:text-2xl xl:text-3xl text-[#3A0519] dark:text-[#FF6363]">
               DoTogether
             </span>
-            <span className="flex justify-end caprasimo   text-[7px]  md:text-xs text-white">
+            <span className="flex justify-end caprasimo text-[7px] md:text-xs text-white">
               Together We Do.....
             </span>
-          </Link>
+          </RouterLink>
         </div>
 
+        {/* Desktop Menu */}
         <div className="md:flex gap-3 items-center hidden">
           <NavLink
             to="/upcomingevents"
             className={({ isActive }) =>
-              `relative  inline-flex items-center justify-center p-0.5 mb-0 md:mb-2 me-2 overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 
-    ${
-      isActive
-        ? "text-white"
-        : "text-[#3A0519] hover:text-white dark:text-[#FBFBFB]"
-    }`
+              `relative inline-flex items-center justify-center p-0.5 mb-0 md:mb-2 me-2 overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 ${
+                isActive
+                  ? "text-white"
+                  : "text-[#3A0519] hover:text-white dark:text-[#FBFBFB]"
+              }`
             }
           >
             {({ isActive }) => (
               <span
-                className={`relative md:font-semibold inter text-[10px] font-bold md:text-xs px-1 md:px-2 py-1 md:py-2 transition-all ease-in duration-75 rounded-md
-        ${
-          isActive
-            ? "bg-transparent group-hover:bg-transparent"
-            : "bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent"
-        }`}
+                className={`relative md:font-semibold inter text-[10px] font-bold md:text-xs px-1 md:px-2 py-1 md:py-2 transition-all ease-in duration-75 rounded-md ${
+                  isActive
+                    ? "bg-transparent group-hover:bg-transparent"
+                    : "bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent"
+                }`}
               >
                 Upcoming Events
               </span>
             )}
           </NavLink>
-          <NavLink
-            to="/upcomingevents"
-            className={({ isActive }) =>
-              `relative inline-flex items-center justify-center p-0.5 mb-0 md:mb-2 me-2 overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 
-    ${
-      isActive
-        ? "text-white"
-        : "text-[#3A0519] hover:text-white dark:text-[#FBFBFB]"
-    }`
-            }
-          >
-            {({ isActive }) => (
-              <span
-                className={`relative md:font-semibold inter text-[10px] font-bold md:text-xs px-1 md:px-2 py-1 md:py-2 transition-all ease-in duration-75 rounded-md
-        ${
-          isActive
-            ? "bg-transparent group-hover:bg-transparent"
-            : "bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent"
-        }`}
-              >
+
+          {location.pathname === "/" ? (
+            <ScrollLink
+              to="gallery-section"
+              smooth={true}
+              duration={600}
+              offset={-80}
+              className="relative inline-flex items-center justify-center p-0.5 mb-0 md:mb-2 me-2 overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 text-[#3A0519] hover:text-white dark:text-[#FBFBFB] cursor-pointer"
+            >
+              <span className="relative md:font-semibold inter text-[10px] font-bold md:text-xs px-1 md:px-2 py-1 md:py-2 transition-all ease-in duration-75 rounded-md bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent">
                 Gallery
               </span>
-            )}
-          </NavLink>
+            </ScrollLink>
+          ) : (
+            <span
+              onClick={handleGalleryClick}
+              className="relative inline-flex items-center justify-center p-0.5 mb-0 md:mb-2 me-2 overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 text-[#3A0519] hover:text-white dark:text-[#FBFBFB] cursor-pointer"
+            >
+              <span className="relative md:font-semibold inter text-[10px] font-bold md:text-xs px-1 md:px-2 py-1 md:py-2 transition-all ease-in duration-75 rounded-md bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent">
+                Gallery
+              </span>
+            </span>
+          )}
+
           <NavLink
-            to="/upcomingevents"
+            to="/about-us"
             className={({ isActive }) =>
-              `relative inline-flex items-center justify-center p-0.5 mb-0 md:mb-2 me-2 overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 
-    ${
-      isActive
-        ? "text-white"
-        : "text-[#3A0519] hover:text-white dark:text-[#FBFBFB]"
-    }`
+              `relative inline-flex items-center justify-center p-0.5 mb-0 md:mb-2 me-2 overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 ${
+                isActive
+                  ? "text-white"
+                  : "text-[#3A0519] hover:text-white dark:text-[#FBFBFB]"
+              }`
             }
           >
             {({ isActive }) => (
               <span
-                className={`relative md:font-semibold inter text-[10px] font-bold md:text-xs px-1 md:px-2 py-1 md:py-2 transition-all ease-in duration-75 rounded-md
-        ${
-          isActive
-            ? "bg-transparent group-hover:bg-transparent"
-            : "bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent"
-        }`}
+                className={`relative md:font-semibold inter text-[10px] font-bold md:text-xs px-1 md:px-2 py-1 md:py-2 transition-all ease-in duration-75 rounded-md ${
+                  isActive
+                    ? "bg-transparent group-hover:bg-transparent"
+                    : "bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent"
+                }`}
               >
                 About Us
               </span>
             )}
           </NavLink>
+
           <NavLink
-            to="/upcomingevents"
+            to="/contract"
             className={({ isActive }) =>
-              `relative inline-flex items-center justify-center p-0.5 mb-0 md:mb-2 me-2 overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 
-    ${
-      isActive
-        ? "text-white"
-        : "text-[#3A0519] hover:text-white dark:text-[#FBFBFB]"
-    }`
+              `relative inline-flex items-center justify-center p-0.5 mb-0 md:mb-2 me-2 overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 ${
+                isActive
+                  ? "text-white"
+                  : "text-[#3A0519] hover:text-white dark:text-[#FBFBFB]"
+              }`
             }
           >
             {({ isActive }) => (
               <span
-                className={`relative md:font-semibold inter text-[10px] font-bold md:text-xs px-1 md:px-2 py-1 md:py-2 transition-all ease-in duration-75 rounded-md
-        ${
-          isActive
-            ? "bg-transparent group-hover:bg-transparent"
-            : "bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent"
-        }`}
+                className={`relative md:font-semibold inter text-[10px] font-bold md:text-xs px-1 md:px-2 py-1 md:py-2 transition-all ease-in duration-75 rounded-md ${
+                  isActive
+                    ? "bg-transparent group-hover:bg-transparent"
+                    : "bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent"
+                }`}
               >
-                Contract Us
+                Contact Us
               </span>
             )}
           </NavLink>
         </div>
+
+        {/* Mobile Menu */}
         {isOpen && (
-          <div className="absolute top-18 left-3  w-[150px] bg-white shadow-lg flex flex-col items-start p-4 gap-3 md:static md:flex-row md:bg-transparent md:shadow-none md:p-0 z-50">
-            <NavLink
-              to="/upcomingevents"
-              className={({ isActive }) =>
-                `relative inline-flex items-center justify-center p-0.5 w-full overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 
-        ${
-          isActive
-            ? "text-white"
-            : "text-[#3A0519] hover:text-white dark:text-[#FBFBFB]"
-        }`
-              }
-            >
-              {({ isActive }) => (
-                <span
-                  className={`relative md:font-semibold w-full inter text-[10px] font-bold md:text-xs px-2 py-2 transition-all ease-in duration-75 rounded-md
-          ${
-            isActive
-              ? "bg-transparent group-hover:bg-transparent"
-              : "bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent"
-          }`}
-                >
-                  Upcoming Events
-                </span>
-              )}
-            </NavLink>
+          <div className="absolute top-18 left-3 w-[150px] bg-gray-600 shadow-lg flex flex-col items-start p-4 gap-3 z-50">
+            <NavLink to="/upcomingevents">Upcoming Events</NavLink>
 
-            <NavLink
-              to="/gallery"
-              className={({ isActive }) =>
-                `relative inline-flex items-center justify-center p-0.5 w-full overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 
-        ${
-          isActive
-            ? "text-white"
-            : "text-[#3A0519] hover:text-white dark:text-[#FBFBFB]"
-        }`
-              }
-            >
-              {({ isActive }) => (
-                <span
-                  className={`relative md:font-semibold inter w-full text-[10px] font-bold md:text-xs px-2 py-2 transition-all ease-in duration-75 rounded-md
-          ${
-            isActive
-              ? "bg-transparent group-hover:bg-transparent"
-              : "bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent"
-          }`}
-                >
-                  Gallery
-                </span>
-              )}
-            </NavLink>
+            {location.pathname === "/" ? (
+              <ScrollLink
+                to="gallery-section"
+                smooth={true}
+                duration={600}
+                offset={-80}
+              >
+                Gallery
+              </ScrollLink>
+            ) : (
+              <span onClick={handleGalleryClick} className="cursor-pointer">
+                Gallery
+              </span>
+            )}
 
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                `relative inline-flex items-center w-full justify-center p-0.5 overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 
-        ${
-          isActive
-            ? "text-white"
-            : "text-[#3A0519] hover:text-white dark:text-[#FBFBFB]"
-        }`
-              }
-            >
-              {({ isActive }) => (
-                <span
-                  className={`relative w-full md:font-semibold inter text-[10px] font-bold md:text-xs px-2 py-2 transition-all ease-in duration-75 rounded-md
-          ${
-            isActive
-              ? "bg-transparent group-hover:bg-transparent"
-              : "bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent"
-          }`}
-                >
-                  About Us
-                </span>
-              )}
-            </NavLink>
-
-            <NavLink
-              to="/contact"
-              className={({ isActive }) =>
-                `relative inline-flex w-full items-center justify-center p-0.5 overflow-hidden font-medium rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 
-        ${
-          isActive
-            ? "text-white"
-            : "text-[#3A0519] hover:text-white dark:text-[#FBFBFB]"
-        }`
-              }
-            >
-              {({ isActive }) => (
-                <span
-                  className={`relative w-full md:font-semibold inter text-[10px] font-bold md:text-xs px-2 py-2 transition-all ease-in duration-75 rounded-md
-          ${
-            isActive
-              ? "bg-transparent group-hover:bg-transparent"
-              : "bg-[#FFDCDC] dark:bg-[#A2678A] group-hover:bg-transparent group-hover:dark:bg-transparent"
-          }`}
-                >
-                  Contact Us
-                </span>
-              )}
-            </NavLink>
+            <NavLink to="/about-us">About Us</NavLink>
+            <NavLink to="/contract">Contact Us</NavLink>
           </div>
         )}
 
+        {/* User / Auth Section */}
         <div className="flex items-center space-x-2 relative" ref={dropdownRef}>
           {user && (
             <>
@@ -283,31 +214,20 @@ const Nav = () => {
               </button>
 
               {dropdownOpen && (
-                <div className="absolute right-0 md:right-33 lg:right-29 top-8 md:top-16 lg:top-18 xl:top-20 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-30 md:w-40 dark:bg-gray-700">
+                <div className="absolute right-0 top-8 z-10 bg-white rounded-lg shadow-sm w-40 dark:bg-gray-700">
                   <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                     <li>
-                      <Link
-                        to={"/createevent"}
-                        className="block px-2 md:px-3 py-1 md:py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Create Event
-                      </Link>
+                      <RouterLink to="/createevent">Create Event</RouterLink>
                     </li>
                     <li>
-                      <Link
-                        to={`/manageevents/${user?.email}`}
-                        className="block px-2 md:px-3 py-1 md:py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
+                      <RouterLink to={`/manageevents/${user?.email}`}>
                         Manage Events
-                      </Link>
+                      </RouterLink>
                     </li>
                     <li>
-                      <Link
-                        to={"/myjoinedevents"}
-                        className="block px-2 md:px-3 py-1 md:py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
+                      <RouterLink to="/myjoinedevents">
                         Joined Events
-                      </Link>
+                      </RouterLink>
                     </li>
                   </ul>
                 </div>
@@ -318,20 +238,16 @@ const Nav = () => {
           {user ? (
             <button
               onClick={handleSingOut}
-              type="button"
-              className="text-white font-semibold bg-gradient-to-r inter text-xs md:text-xl from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br shadow-lg shadow-red-500/20 dark:shadow-lg dark:shadow-red-800/20 rounded-lg px-1 md:px-3 py-1 md:py-2 text-center"
+              className="text-white font-semibold bg-gradient-to-r inter text-xs md:text-xl from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br rounded-lg px-1 md:px-3 py-1 md:py-2"
             >
               Sing Out
             </button>
           ) : (
-            <Link to={"/login"}>
-              <button
-                type="button"
-                className="text-white font-semibold bg-gradient-to-r inter text-xs md:text-xl from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br shadow-lg shadow-red-500/20 dark:shadow-lg dark:shadow-red-800/20 rounded-lg px-1 md:px-3 py-1 md:py-2 text-center"
-              >
+            <RouterLink to="/login">
+              <button className="text-white font-semibold bg-gradient-to-r inter text-xs md:text-xl from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br rounded-lg px-1 md:px-3 py-1 md:py-2">
                 Log In
               </button>
-            </Link>
+            </RouterLink>
           )}
 
           <DarkMoodBtn />
