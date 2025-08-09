@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Zoom } from "react-awesome-reveal";
 import { IoLocationSharp } from "react-icons/io5";
 import { MdDateRange } from "react-icons/md";
@@ -12,7 +12,7 @@ const MyEventsCard = ({ event, onDelete }) => {
   const handleEventDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: `You want to delete "${title}"`,
+      text: `You want to delete "${title}"?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -28,24 +28,18 @@ const MyEventsCard = ({ event, onDelete }) => {
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your event has been deleted.",
-                icon: "success",
-              });
+              Swal.fire("Deleted!", "Your event has been deleted.", "success");
               onDelete(id);
             }
           })
-          .catch((error) => {
+          .catch(() => {
             Swal.fire(
               "Error",
               "Failed to delete event. Please try again.",
               "error"
             );
           })
-          .finally(() => {
-            setIsDeleting(false);
-          });
+          .finally(() => setIsDeleting(false));
       }
     });
   };
@@ -58,32 +52,34 @@ const MyEventsCard = ({ event, onDelete }) => {
           src={photoURL}
           alt={title}
         />
+
         <div className="flex justify-between mx-5 mt-6">
-          <div className="flex gap-1 border-transparent bg-amber-500 p-1 rounded-2xl">
+          <div className="flex items-center gap-1 bg-amber-500 p-1 rounded-2xl">
             <MdDateRange />
-            <p className="text-[10px] text-gray-900 dark:text-white inter">
+            <p className="text-[8px] px-1 text-gray-900 dark:text-white inter">
               {date}
             </p>
           </div>
-          <div className="flex gap-1 border-transparent bg-amber-500 p-1 rounded-2xl">
+          <div className="flex items-center gap-1 bg-amber-500 p-1 rounded-2xl">
             <IoLocationSharp />
-            <p className="text-[10px] text-gray-900 dark:text-white inter">
+            <p className="text-[8px] px-1 text-gray-900 dark:text-white inter">
               {location}
             </p>
           </div>
         </div>
+
         <div className="py-3 px-5 flex-1">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white inter">
             {title}
           </h5>
-
           <p className="mb-3 font-normal text-gray-700 h-[40px] dark:text-gray-400 overflow-hidden inter">
             {description}
           </p>
         </div>
-        <div className="mb-5 ml-5 flex justify-between">
+
+        <div className="mb-5 mx-3 flex justify-between">
           <Link to={`/update/${_id}`}>
-            <button className="inline-flex gap-2 items-center px-3 py-2 text-xl font-bold text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inter">
+            <button className="inline-flex gap-1 items-center px-1.5 py-1 text-xl font-bold  bg-[#4ED7F1] dark:bg-[#1A1A1D] text-[#3A0519] dark:text-[#FF6363] rounded-lg    hover:bg-[#78c1cf] dark:hover:bg-gray-700 inter">
               Edit
               <svg
                 className="w-9 h-9 pb-1"
@@ -111,10 +107,10 @@ const MyEventsCard = ({ event, onDelete }) => {
           <button
             onClick={() => handleEventDelete(_id)}
             disabled={isDeleting}
-            className={`inline-flex gap-2 mr-5 items-center px-3 py-2 text-xl font-bold text-center text-white rounded-lg focus:ring-4 focus:outline-none inter ${
+            className={`inline-flex gap-1  items-center px-1.5 py-1  text-xl font-bold rounded-lg focus:ring-4 focus:outline-none inter text-[#3A0519] ${
               isDeleting
-                ? "bg-gray-500 cursor-not-allowed"
-                : "bg-blue-700 hover:bg-blue-800 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                ? "bg-gray-500  cursor-not-allowed"
+                : "bg-[#4ED7F1] dark:bg-[#1A1A1D]  dark:text-[#FF6363] rounded-lg    hover:bg-[#78c1cf] dark:hover:bg-gray-700 inter "
             }`}
           >
             {isDeleting ? (

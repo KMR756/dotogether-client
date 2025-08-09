@@ -181,7 +181,7 @@ const CreateEvent = () => {
 
           <div class="flex items-center justify-center mb-4">
             <button
-              class="inter font-bold bg-[#4ED7F1] dark:bg-[#1A1A1D] text-[#3A0519] dark:text-[#FF6363] py-2 px-4 rounded hover:bg-[#78c1cf] focus:outline-none focus:shadow-outline"
+              class="inter font-bold bg-[#4ED7F1] dark:bg-[#1A1A1D] text-[#3A0519] dark:text-[#FF6363] py-2 px-4 rounded hover:bg-[#78c1cf] dark:hover:bg-gray-700 focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Create Event

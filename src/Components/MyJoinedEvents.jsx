@@ -44,7 +44,7 @@ const MyJoinedEvents = () => {
   }
 
   return (
-    <div className=" py-8 px-4 sm:px-6 lg:px-8">
+    <div className="w-[95%] md:w-[90%] lg:w-10/12 mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <Fade direction="up" duration={2000} triggerOnce>
         <h1 className="w-10/12 mx-auto mb-10 text-center text-4xl md:text-7xl dark:text-white text-[#FF6363] inter font-black mt-10 md:mt-20">
           My joined events
