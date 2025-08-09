@@ -6,8 +6,8 @@ import ashishBhanderi from "../assets/ashish-bhanderi.jpg";
 const Gallery = () => {
   return (
     <>
-      <div className="   py-3 sm:py-8 lg:py-12">
-        <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
+      <div className=" w-10/12 mx-auto  py-3 ">
+        <div className="mx-auto max-w-screen-2xl ">
           <div className="mb-4 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
             <div className="flex flex-col md:flex-row items-center gap-4 md:gap-12">
               <h2 className="text-4xl md:text-7xl dark:text-white text-[#FF6363] inter font-black ">

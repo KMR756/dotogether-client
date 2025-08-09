@@ -6,6 +6,7 @@ import Feature from "../Components/Feature";
 import Gallery from "../Components/Gallery";
 import Counter from "../Components/Counter";
 import NewsLatter from "../Components/NewsLatter";
+import FaqSection from "./FaqSection";
 
 const Home = () => {
   const location = useLocation();
@@ -30,6 +31,7 @@ const Home = () => {
       <div id="gallery-section">
         <Gallery />
       </div>
+      <FaqSection />
       {/* <NewsLatter /> */}
     </>
   );

@@ -13,20 +13,20 @@ const UpcomingEventsCard = ({ event }) => {
       <Zoom duration={500} triggerOnce>
         <div className="flex h-[455px] flex-col bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
           <img
-            className="rounded-t-lg h-[200px] w-full object-cover"
+            className="rounded-t-lg max-h-[140px] w-full object-cover"
             src={photoURL}
             alt=""
           />
           <div className="flex justify-between mx-5 mt-6">
-            <div className="flex gap-1 border-transparent bg-amber-500 p-1 rounded-2xl">
+            <div className="flex gap-1 items-center border-transparent bg-amber-500 p-1 rounded-2xl">
               <MdDateRange />
-              <p className="text-[10px] text-gray-900 dark:text-white inter">
+              <p className="text-[8px]  text-gray-900 dark:text-white inter">
                 {date}
               </p>
             </div>
-            <div className="flex gap-1 border-transparent bg-amber-500 p-1 rounded-2xl">
+            <div className="flex items-center gap-1 border-transparent bg-amber-500 p-1 rounded-2xl">
               <IoLocationSharp />
-              <p className="text-[10px] text-gray-900 dark:text-white inter">
+              <p className="text-[8px] text-gray-900 dark:text-white inter">
                 {location}
               </p>
             </div>

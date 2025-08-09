@@ -3,17 +3,17 @@ import React from "react";
 const Footer = () => {
   return (
     <>
-      <footer className="">
-        <div className=" w-[95%]   md:w-10/12 mx-auto">
+      <footer>
+        <div className="w-full">
           {/* <!--Grid--> */}
-          <div className="py-14 flex flex-col lg:flex-row items-center justify-center gap-5 md:gap-10">
-            <div className=" col-span-full xl:col-span-3 relative bg-gradient-to-tr from-indigo-600 dark:from-gray-600 to-violet-600 dark:to-gray-500  rounded-2xl gap-2 md:gap-12 p-2 md:p-6 w-[95%] h-96 flex flex-col justify-center items-center">
+          <div className=" flex flex-col lg:flex-row items-center justify-center bg-[#4ED7F1]">
+            <div className="       dark:bg-[#1A1A1D] gap-10 md:px-40  h-96 flex flex-col justify-center items-center">
               <a href="#" className="flex  flex-col">
-                <span className="self-center flex  caprasimo font-bold text-5xl  text-white dark:text-[#FF6363]">
+                <span className="self-center flex  caprasimo font-bold text-5xl  text-black dark:text-[#FF6363]">
                   DoTogether
                 </span>
               </a>
-              <p className="text-center text-xl text-gray-200">
+              <p className="text-center text-xl inter text-white">
                 DoTogether empowers communities to connect, contribute, and
                 create change through local events. Join hands, take action, and
                 make a difference — one event at a time.
@@ -132,7 +132,7 @@ const Footer = () => {
               </div>
             </div>
 
-            <div className="block text-center xl:text-left xl:py-16 col-span-full min-[500px]:col-span-6 md:col-span-4 xl:col-span-3 xl:pl-5">
+            {/* <div className="block text-center xl:text-left xl:py-16 col-span-full min-[500px]:col-span-6 md:col-span-4 xl:col-span-3 xl:pl-5">
               <h4 className="text-4xl inter text-gray-900 dark:text-white font-bold mb-2 md:mb-9">
                 Get In Touch
               </h4>
@@ -141,7 +141,7 @@ const Footer = () => {
                 <li>+88 123 456 7898</li>
                 <li>225, Malibagh, Dhaka, bangladesh.</li>
               </ul>
-            </div>
+            </div> */}
           </div>
           {/* <!--Grid--> */}
         </div>

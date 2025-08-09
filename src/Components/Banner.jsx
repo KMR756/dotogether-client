@@ -17,7 +17,9 @@ const Banner = () => {
       <div className="inter absolute inset-0 flex flex-col items-start ml-4 md:ml-16 xl:ml-20 mb-40 justify-center   text-white">
         <h1 className="text-3xl  md:text-5xl font-bold mb-3 ml-8">
           Welcome to{" "}
-          <span className="text-black dark:text-[#FF6363]">DoTogether...</span>
+          <span className=" caprasimo text-black dark:text-[#FF6363]">
+            DoTogether...
+          </span>
         </h1>
         <span className="inter text-xl md:text-2xl font-medium ml-13">
           <Typewriter
